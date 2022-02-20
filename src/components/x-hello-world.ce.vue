@@ -7,7 +7,7 @@ const count = ref(0)
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h2>{{ msg }}</h2>
 
   <div>
     <!-- .ce.vue から別の .ce.vue を import すると CSS が読まれないらしい。 -->
