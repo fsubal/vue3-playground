@@ -21,10 +21,12 @@ const tagToClass = objectMap(
    */
   import.meta.globEager("./components/*.ce.vue"),
   (pathname, module) => {
-    if (!("default" in module)) {
-      throw new TypeError(
-        `The file of ./components should export default Vue component`
-      );
+    if (import.meta.env.MODE === "development") {
+      if (!("default" in module)) {
+        throw new TypeError(
+          `The file of ./components should export default Vue component`
+        );
+      }
     }
 
     return [fileNameToTag(pathname), module.default];
