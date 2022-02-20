@@ -9,3 +9,18 @@ export function register(components: Record<string, Component>) {
     );
   });
 }
+
+const TAG_NAME_RULE = /^x-[a-z-]+$/;
+
+export function fileNameToTag(pathname: string) {
+  const [filename] = pathname.split("/").slice(-1);
+  const tagName = filename.replace(".ce.vue", "");
+
+  if (TAG_NAME_RULE.test(tagName) === false) {
+    throw new TypeError(
+      `The filename of ./components should be like "x-〇〇.ce.vue". Got ${pathname}`
+    );
+  }
+
+  return tagName;
+}

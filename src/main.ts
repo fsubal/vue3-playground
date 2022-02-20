@@ -1,10 +1,34 @@
 import "./index.css";
-import { register } from "./customElement";
+import { fileNameToTag, register } from "./customElement";
+import { objectMap } from "./util";
 
-import HelloWorld from "./components/x-hello-world.ce.vue";
-import Avatar from "./components/x-avatar.ce.vue";
+/**
+ * だいたい ↓ と等価。それを自動でやってくれるやつ。
+ *
+ * ```ts
+ * import Avatar from './components/x-avatar.ce.vue'
+ * import HelloWorld from './components/x-hello-world.ce.vue'
+ *
+ * register({
+ *   'x-avatar': Avatar,
+ *   'x-hello-world': HelloWorld,
+ * })
+ * ```
+ */
+const tagToClass = objectMap(
+  /**
+   * @see https://vitejs.dev/guide/features.html#glob-import
+   */
+  import.meta.globEager("./components/*.ce.vue"),
+  (pathname, module) => {
+    if (!("default" in module)) {
+      throw new TypeError(
+        `The file of ./components should export default Vue component`
+      );
+    }
 
-register({
-  "x-hello-world": HelloWorld,
-  "x-avatar": Avatar,
-});
+    return [fileNameToTag(pathname), module.default];
+  }
+);
+
+register(tagToClass);
