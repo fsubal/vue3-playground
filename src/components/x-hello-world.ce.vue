@@ -9,6 +9,13 @@ const count = ref(0)
 <template>
   <h1>{{ msg }}</h1>
 
+  <div>
+    <!-- .ce.vue から別の .ce.vue を import すると CSS が読まれないらしい。 -->
+    <!-- ので、register された x-〇〇 の方の名前で参照するのが現状では正しい（ただし議論中） -->
+    <!-- https://github.com/vuejs/core/pull/4309#issuecomment-896886449 -->
+    <x-avatar src="https://v3.ja.vuejs.org/logo.png">私です。</x-avatar>
+  </div>
+
   <p>
     Recommended IDE setup:
     <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
