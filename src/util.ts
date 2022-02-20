@@ -7,7 +7,7 @@ export function objectMap<T, V>(
   );
 }
 
-export function transformKeys<T, V>(
+export function transformKeys(
   object: Record<string, any>,
   fn: (key: string) => string
 ) {
