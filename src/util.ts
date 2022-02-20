@@ -1,14 +1,14 @@
-export function objectMap<T, V>(
-  object: Record<string, T>,
-  fn: (key: string, values: T) => readonly [string, V] | [string, V]
+export function objectMap<From, To>(
+  object: Record<string, From>,
+  fn: (key: string, values: From) => readonly [string, To] | [string, To]
 ) {
   return Object.fromEntries(
     Object.entries(object).map(([key, value]) => fn(key, value))
   );
 }
 
-export function transformKeys(
-  object: Record<string, any>,
+export function transformKeys<V>(
+  object: Record<string, V>,
   fn: (key: string) => string
 ) {
   return objectMap(object, (key, value) => [fn(key), value]);
