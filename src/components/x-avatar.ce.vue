@@ -1,11 +1,11 @@
 <script setup lang="ts">
-defineProps<{ src: string }>()
+defineProps<{ imageUrl: string }>()
 </script>
 
 <template>
   <div class="wrapper">
     <div class="avatar-icon">
-      <img :src="src" alt="アイコン">
+      <img :src="imageUrl" alt="アイコン">
     </div>
     <div class="description">
       <slot></slot>
